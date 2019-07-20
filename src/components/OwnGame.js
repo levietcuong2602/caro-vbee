@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import calculateWinner from '../utils/calculateWinner';
 import OwnBoard from './OwnBoard';
+import Time from './Time';
+import PlayerInfo from './PlayerInfo';
 
 export default class OwnGame extends Component {
   constructor() {
@@ -76,9 +78,15 @@ export default class OwnGame extends Component {
     });
 
     return (
-      <div>
+      <div className="app-game">
+        <div className="player-game">
+          <PlayerInfo playerName="X"/>
+          <hr/>
+          <PlayerInfo playerName="O"/>
+        </div>
         <div className="game">
-          <OwnBoard squares={current.squares}
+          <OwnBoard
+            squares={current.squares}
             onClick={i => this.handleClick(i)}
             winner={winner && winner.winnerLocation} />
         </div>

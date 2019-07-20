@@ -41,6 +41,11 @@ ul {
   background: #ddd;
 }
 
+.app-game {
+  display: flex;
+  justify-content: center;
+}
+
 .game {
   display: flex;
   flex-direction: row;
@@ -52,4 +57,24 @@ ul {
 
 .winner {
   background-color: #d3d3d3;
+}
+
+.time-game {
+  display: flex;
+  justify-content: center;
+  color: #e80f0f;
+}
+.time-game :first-child {
+  margin-right: 10px;
+  color: #000;
+}
+
+.player-game {
+  margin-right: 20px;
+}
+
+.player-game .player {
+  padding: 5px 10px;
+  /* border: 1px solid #928282; */
+  /* border-radius: 3px; */
 }
