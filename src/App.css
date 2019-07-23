@@ -46,6 +46,14 @@ ul {
   justify-content: center;
 }
 
+.game-option {
+  margin-right: 20px;
+}
+
+.game-option p {
+  margin: 0px;
+}
+
 .game {
   display: flex;
   flex-direction: row;
@@ -53,6 +61,10 @@ ul {
 
 .game-info {
   margin-left: 20px;
+}
+
+.game-info p {
+  margin: 0px;
 }
 
 .winner {
@@ -64,9 +76,9 @@ ul {
   justify-content: center;
   color: #e80f0f;
 }
-.time-game :first-child {
-  margin-right: 10px;
-  color: #000;
+
+.time-game p {
+  margin: 0px;
 }
 
 .player-game {
