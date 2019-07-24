@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "game-caro-vbee",
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@now/reactjs"
+    }
+  ]
+}
