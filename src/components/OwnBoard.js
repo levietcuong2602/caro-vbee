@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import OwnSquare from "./OwnSquare";
+import { makeArrayWithSize } from "../utils/makeArrayWithSize";
 
 export default class OwnBoard extends Component {
   renderSquare(i) {
@@ -8,13 +9,13 @@ export default class OwnBoard extends Component {
       <OwnSquare
         value={squares[i]}
         onClick={() => this.props.onClick(i)}
-        winner={winner && winner.includes(i) ? "winner" : ""}
+        // winner={winner && winner.includes(i) ? "winner" : ""}
       />
     );
   }
 
   renderBoard() {
-    const rowsWidth = Array(Math.sqrt(this.props.squares.length)).fill(null);
+    const rowsWidth = makeArrayWithSize(this.props.gameSize);
     const celsWidth = rowsWidth;
     const board = rowsWidth.map((row, i) => {
       const squares = celsWidth.map((cel, j) => {

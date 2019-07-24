@@ -5,15 +5,16 @@ import Time from "./Time";
 import calculateWinner from "../utils/calculateWinner";
 import calculateTimer from "../utils/calculateTimer";
 import * as constants from "../constants/index";
+import { makeArrayWithSize } from "../utils/makeArrayWithSize";
 
 export default class OwnGame extends Component {
   constructor(props) {
     super(props);
-
+    const { gameSize } = this.props;
     this.state = {
       history: [
         {
-          squares: Array(props.gameSize * props.gameSize).fill(null),
+          squares: makeArrayWithSize(Math.pow(gameSize, 2)),
           moveLocation: ""
         }
       ],
@@ -21,10 +22,10 @@ export default class OwnGame extends Component {
       stepNumber: 0,
       isReverse: false,
       statusGame: constants.GAME_INIT,
-      gameSize: props.gameSize,
       timeGame: 0,
       timeX: 0,
-      timeY: 0
+      timeY: 0,
+      gameSetting: 3
     };
 
     this.onStart = this.onStart.bind(this);
@@ -32,6 +33,20 @@ export default class OwnGame extends Component {
     this.onPause = this.onPause.bind(this);
     this.onResume = this.onResume.bind(this);
     this.onUndo = this.onUndo.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.gameSize !== this.props.gameSize) {
+      const { gameSize } = nextProps;
+      this.setState({
+        history: [
+          {
+            squares: makeArrayWithSize(Math.pow(gameSize, 2)),
+            moveLocation: ""
+          }
+        ]
+      });
+    }
   }
 
   onStart(e) {
@@ -47,7 +62,7 @@ export default class OwnGame extends Component {
         stepNumber: 0,
         history: [
           {
-            squares: Array(gameSize * gameSize).fill(null),
+            squares: makeArrayWithSize(Math.pow(gameSize, 2)),
             moveLocation: ""
           }
         ]
@@ -59,18 +74,23 @@ export default class OwnGame extends Component {
 
   onReset(e) {
     e.preventDefault();
-    if (this.state.statusGame === constants.GAME_END) {
+    const { gameSize } = this.props;
+    if (
+      this.state.statusGame === constants.GAME_END ||
+      this.state.statusGame === constants.GAME_PAUSE
+    ) {
       this.setState({
         statusGame: constants.GAME_INIT
       });
     }
+
     this.setState({
       timeGame: 0,
       xIsNext: true,
       stepNumber: 0,
       history: [
         {
-          squares: Array(9).fill(null),
+          squares: makeArrayWithSize(Math.pow(gameSize, 2)),
           moveLocation: ""
         }
       ]
@@ -143,14 +163,15 @@ export default class OwnGame extends Component {
 
   handleClick(i) {
     const { statusGame } = this.state;
+    const { gameSetting } = this.props;
     if (statusGame === constants.GAME_START) {
       const history = this.state.history.slice(0, this.state.stepNumber + 1);
       const current = history[history.length - 1];
       const squares = current.squares.slice();
-      const gameSize = this.state.gameSize;
+      const gameSize = this.props.gameSize;
 
       // check click squares
-      if (squares[i] || calculateWinner(squares)) {
+      if (squares[i] || calculateWinner(squares, gameSetting)) {
         return;
       }
       squares[i] = this.state.xIsNext ? "X" : "O";
@@ -178,7 +199,7 @@ export default class OwnGame extends Component {
       );
 
       // check win after click
-      if (calculateWinner(squares)) {
+      if (calculateWinner(squares, gameSetting)) {
         this.stopTimerAndUpdateGame();
       }
     }
@@ -202,13 +223,14 @@ export default class OwnGame extends Component {
     const { history, timeGame } = this.state;
     const current = history[this.state.stepNumber];
     const isReverse = this.state.isReverse;
-    const winner = calculateWinner(current.squares);
+    const { gameSize, gameSetting } = this.props;
+    const winner = calculateWinner(current.squares, gameSetting);
     const { min, sec } = calculateTimer(timeGame);
     let status;
 
     if (winner) {
       status = `Winner is: ${winner.winnerPlayer}`;
-    } else if (this.state.stepNumber === 9) {
+    } else if (this.state.stepNumber === Math.pow(gameSize, 2)) {
       status = "Draw";
     } else {
       status = `Next player is: ${this.state.xIsNext ? "X" : "O"}`;
@@ -262,9 +284,10 @@ export default class OwnGame extends Component {
         </div>
         <div className="game">
           <OwnBoard
+            gameSize={gameSize}
             squares={current.squares}
             onClick={i => this.handleClick(i)}
-            winner={winner && winner.winnerLocation}
+            winner={winner}
           />
         </div>
         <div className="game-info">
