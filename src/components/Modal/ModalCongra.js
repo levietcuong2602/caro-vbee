@@ -46,34 +46,32 @@ export default class ModalCongra extends Component {
     }
 
     return (
-      <div>
-        <Modal
-          size="tiny"
-          open={visibleModal}
-          onClose={this.closeModal}
-          style={{ position: "relative" }}
-        >
-          <Modal.Header style={{ background: "#3b943b", color: "#fff" }}>
-            <h3 className="text-center">Chúc mừng</h3>
-          </Modal.Header>
-          <Modal.Content>
-            <p
-              className="text-center"
-              dangerouslySetInnerHTML={{ __html: status }}
-            >
-              {/* {status} */}
-            </p>
-          </Modal.Content>
-          <Modal.Actions className="text-center">
-            <Button positive onClick={this.closeModal}>
-              Xem chi tiết
-            </Button>
-            <Button negative onClick={this.handleResetGame}>
-              Đánh lại
-            </Button>
-          </Modal.Actions>
-        </Modal>
-      </div>
+      <Modal
+        size="tiny"
+        open={visibleModal}
+        onClose={this.closeModal}
+        style={{ position: "relative" }}
+      >
+        <Modal.Header style={{ background: "#3b943b", color: "#fff" }}>
+          <h3 className="text-center">Chúc mừng</h3>
+        </Modal.Header>
+        <Modal.Content>
+          <p
+            className="text-center"
+            dangerouslySetInnerHTML={{ __html: status }}
+          >
+            {/* {status} */}
+          </p>
+        </Modal.Content>
+        <Modal.Actions className="text-center">
+          <Button positive onClick={this.closeModal}>
+            Xem chi tiết
+          </Button>
+          <Button negative onClick={this.handleResetGame}>
+            Đánh lại
+          </Button>
+        </Modal.Actions>
+      </Modal>
     );
   }
 }
