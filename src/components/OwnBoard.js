@@ -9,7 +9,7 @@ export default class OwnBoard extends Component {
       <OwnSquare
         value={squares[i]}
         onClick={() => this.props.onClick(i)}
-        // winner={winner && winner.includes(i) ? "winner" : ""}
+        winner={winner && winner.includes(i) ? "winner" : ""}
       />
     );
   }

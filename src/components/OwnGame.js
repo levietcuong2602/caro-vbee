@@ -287,7 +287,7 @@ export default class OwnGame extends Component {
             gameSize={gameSize}
             squares={current.squares}
             onClick={i => this.handleClick(i)}
-            winner={winner}
+            winner={winner && winner.winnerLocation}
           />
         </div>
         <div className="game-info">

@@ -11,11 +11,6 @@ export default class App extends Component {
       gameSize: 3,
       gameSetting: 3,
       modalVisible: true
-      // gameOptions: [
-      //   { key: "3", value: "3", text: "Chạm 3 (default)" },
-      //   { key: "4", value: "4", text: "Chạm 4" },
-      //   { key: "5", value: "5", text: "Chạm 5" }
-      // ]
     };
 
     this.closeModal = this.closeModal.bind(this);
@@ -34,7 +29,8 @@ export default class App extends Component {
   handleChange(e) {
     e.preventDefault();
     this.setState({
-      [e.target.name]: e.target.value
+      // [e.target.name]: e.target.value
+      [e.target.name]: parseInt(e.target.value)
     });
   }
 
@@ -46,7 +42,6 @@ export default class App extends Component {
         <div className="container">
           <OwnGame gameSize={gameSize} gameSetting={gameSetting} />
         </div>
-
         <Modal
           size="tiny"
           open={modalVisible}
@@ -80,17 +75,10 @@ export default class App extends Component {
                 </label>
               </div>
               <div className="col-lg-8">
-                {/* <Select
-                  name="gameSetting"
-                  placeholder="Select game settings"
-                  options={gameOptions}
-                  style={{ width: "100%" }}
-                  onChange={e => this.handleChange(e)}
-                /> */}
                 <select
                   name="gameSetting"
                   id="gameSetting"
-                  value="3"
+                  value={gameSetting}
                   style={{ width: "100%", height: "40px", borderRadius: "3px" }}
                   onChange={e => this.handleChange(e)}
                 >
