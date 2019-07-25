@@ -42,7 +42,7 @@ export default class ModalCongra extends Component {
         winner.winnerPlayer
       }</strong> đã dành chiến thắng`;
     } else {
-      status = "Hoà cờ";
+      status = "<strong>Hoà cờ<strong>";
     }
 
     return (
