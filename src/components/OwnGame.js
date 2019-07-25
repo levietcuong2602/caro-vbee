@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import OwnBoard from "./OwnBoard";
 import Time from "./Time";
+import ModalCongra from "./Modal/ModalCongra";
 
 import calculateWinner from "../utils/calculateWinner";
 import calculateTimer from "../utils/calculateTimer";
@@ -299,6 +300,9 @@ export default class OwnGame extends Component {
           <button onClick={() => this.reverseSort(isReverse)}>
             Reverse list
           </button>
+        </div>
+        <div className="modal-congra">
+          <ModalCongra />
         </div>
       </div>
     );

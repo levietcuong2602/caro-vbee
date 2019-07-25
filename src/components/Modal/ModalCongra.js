@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { Modal, Button } from "semantic-ui-react";
 
 export default class ModalCongra extends Component {
   constructor() {
+    super();
+
     this.closeModal = this.closeModal.bind(this);
   }
   closeModal() {

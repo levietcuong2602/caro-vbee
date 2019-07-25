@@ -54,9 +54,13 @@ var checkWinWithRow = function(squares, rules, player) {
     ) {
       const arrayCheck = [];
       for (let j = 0; j < rules; j++) {
-        arrayCheck.push(squares[index + j]);
+        if (squares[index + j] === player) {
+          arrayCheck.push(squares[index + j]);
+        } else {
+          break;
+        }
       }
-      if (arrayCheck.every(e => e === player)) {
+      if (arrayCheck.every(e => e === player) && arrayCheck.length === rules) {
         return [...makeArrayWithSize(rules).fill(index)].map((e, i) => e + i);
       }
     }
@@ -81,9 +85,13 @@ var checkWinWithColum = function(squares, rules, player) {
     if (endIndex < length && squares[index] === player) {
       const arrayTemp = [];
       for (let j = 0; j < rules; j++) {
-        arrayTemp.push(squares[index + gameSize * j]);
+        if (squares[index + gameSize * j] === player) {
+          arrayTemp.push(squares[index + gameSize * j]);
+        } else {
+          break;
+        }
       }
-      if (arrayTemp.every(e => e === player)) {
+      if (arrayTemp.every(e => e === player) && arrayTemp.length === rules) {
         return [...makeArrayWithSize(rules).fill(index)].map(
           (e, i) => e + i * gameSize
         );
@@ -109,9 +117,13 @@ var checkWinWithdiagonalLeftToRight = function(squares, rules, player) {
     if (endIndex < length && squares[index] === player) {
       const arrayTemp = [];
       for (let j = 0; j < rules; j++) {
-        arrayTemp.push(squares[index + gameSize * j + j]);
+        if (squares[index + gameSize * j + j] === player) {
+          arrayTemp.push(squares[index + gameSize * j + j]);
+        } else {
+          break;
+        }
       }
-      if (arrayTemp.every(e => e === player)) {
+      if (arrayTemp.every(e => e === player) && arrayTemp.length === rules) {
         return [...makeArrayWithSize(rules).fill(index)].map(
           (e, i) => e + gameSize * i + i
         );
@@ -142,9 +154,13 @@ var checkWinWithdiagonalRightToLeft = function(squares, rules, player) {
     ) {
       const arrayTemp = [];
       for (let j = 0; j < rules; j++) {
-        arrayTemp.push(squares[index + gameSize * j - j]);
+        if (squares[index + gameSize * j - j]) {
+          arrayTemp.push(squares[index + gameSize * j - j]);
+        } else {
+          break;
+        }
       }
-      if (arrayTemp.every(e => e === player)) {
+      if (arrayTemp.every(e => e === player) && arrayTemp.length === rules) {
         return [...makeArrayWithSize(rules).fill(index)].map(
           (e, i) => e + gameSize * i - i
         );
