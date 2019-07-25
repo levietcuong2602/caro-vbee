@@ -221,28 +221,27 @@ export default class OwnGame extends Component {
   }
 
   render() {
-    const { history, timeGame } = this.state;
-    const current = history[this.state.stepNumber];
-    const isReverse = this.state.isReverse;
+    const { history, timeGame, xIsNext, stepNumber, isReverse } = this.state;
     const { gameSize, gameSetting } = this.props;
+    const current = history[stepNumber];
     const winner = calculateWinner(current.squares, gameSetting);
     const { min, sec } = calculateTimer(timeGame);
     let status;
 
     if (winner) {
       status = `Winner is: ${winner.winnerPlayer}`;
-    } else if (this.state.stepNumber === Math.pow(gameSize, 2)) {
+    } else if (stepNumber === Math.pow(gameSize, 2)) {
       status = "Draw";
     } else {
-      status = `Next player is: ${this.state.xIsNext ? "X" : "O"}`;
+      status = `Next player is: ${xIsNext ? "X" : "O"}`;
     }
 
     const moves = history.map((step, move) => {
-      // const desc = move ? `Move #${move} (${step.moveLocation})` : "Start game";
+      const player = move % 2 ? "X" : "Y";
       return (
         <li key={move}>
           <a href="/" onClick={e => this.jumpTo(e, move)}>
-            {`Move #${move} (${step.moveLocation})`}
+            {`${player} Move #${move} (${step.moveLocation})`}
           </a>
         </li>
       );
@@ -305,7 +304,7 @@ export default class OwnGame extends Component {
           </button>
         </div>
         <div className="modal-congra">
-          <ModalCongra />
+          <ModalCongra winner={winner} />
         </div>
       </div>
     );

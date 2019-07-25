@@ -114,7 +114,12 @@ var checkWinWithdiagonalLeftToRight = function(squares, rules, player) {
   for (let index = 0; index < length; index++) {
     const endIndex = parseInt(index + (gameSize + 1) * (rules - 1));
 
-    if (endIndex < length && squares[index] === player) {
+    if (
+      endIndex < length &&
+      squares[index] === player &&
+      Math.floor(endIndex / gameSize) - Math.floor(index / gameSize) ===
+        rules - 1
+    ) {
       const arrayTemp = [];
       for (let j = 0; j < rules; j++) {
         if (squares[index + gameSize * j + j] === player) {
