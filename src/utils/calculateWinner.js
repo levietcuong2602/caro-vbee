@@ -20,13 +20,13 @@ export default function calculateWinner(squares, rules = 3) {
 
   // Check Win Y
   winnerLocation =
-    checkWinWithRow(squares, rules, "Y") ||
-    checkWinWithColum(squares, rules, "Y") ||
-    checkWinWithdiagonalLeftToRight(squares, rules, "Y") ||
-    checkWinWithdiagonalRightToLeft(squares, rules, "Y");
+    checkWinWithRow(squares, rules, "O") ||
+    checkWinWithColum(squares, rules, "O") ||
+    checkWinWithdiagonalLeftToRight(squares, rules, "O") ||
+    checkWinWithdiagonalRightToLeft(squares, rules, "O");
   if (winnerLocation) {
     return {
-      winnerPlayer: "Y",
+      winnerPlayer: "O",
       winnerLocation
     };
   }

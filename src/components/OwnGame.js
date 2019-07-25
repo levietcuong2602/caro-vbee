@@ -221,7 +221,14 @@ export default class OwnGame extends Component {
   }
 
   render() {
-    const { history, timeGame, xIsNext, stepNumber, isReverse } = this.state;
+    const {
+      history,
+      timeGame,
+      xIsNext,
+      stepNumber,
+      isReverse,
+      statusGame
+    } = this.state;
     const { gameSize, gameSetting } = this.props;
     const current = history[stepNumber];
     const winner = calculateWinner(current.squares, gameSetting);
@@ -304,7 +311,11 @@ export default class OwnGame extends Component {
           </button>
         </div>
         <div className="modal-congra">
-          <ModalCongra winner={winner} />
+          <ModalCongra
+            winner={winner}
+            statusGame={statusGame}
+            onReset={this.onReset}
+          />
         </div>
       </div>
     );
