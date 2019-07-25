@@ -29,7 +29,9 @@ export default class App extends Component {
         <div className="container">
           <OwnGame gameSize={gameSize} gameSetting={gameSetting} />
         </div>
-        <ModalSetting onSave={this.onSave} />
+        <div className="modal-setting">
+          <ModalSetting onSave={this.onSave} />
+        </div>
       </div>
     );
   }

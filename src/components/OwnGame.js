@@ -281,6 +281,9 @@ export default class OwnGame extends Component {
                 Undo
               </a>
             </li>
+            <li>
+              <a href="/">Refresh</a>
+            </li>
           </ul>
         </div>
         <div className="game">
